@@ -331,3 +331,34 @@ body {
 .hljs-operator {
     color: #ff69b4; /* Pink for operators */
 }
+
+/* Themes */
+body.light-blue {
+    --bg-color: #e0f7fa;
+    --user-msg-color: #007acc;
+    --bot-msg-color: #ffffff;
+    --text-color: #333;
+    --accent-color: #007acc;
+    --input-bg: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-blue {
+    --bg-color: #001f3f;
+    --user-msg-color: #0074d9;
+    --bot-msg-color: #7fdbff;
+    --text-color: #ffffff;
+    --accent-color: #7fdbff;
+    --input-bg: #001f3f;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+}
+
+body.light-mode {
+    --bg-color: #ffffff;
+    --user-msg-color: #e0e0e0;
+    --bot-msg-color: #f5f5f5;
+    --text-color: #333;
+    --accent-color: #808080;
+    --input-bg: #f5f5f5;
+    --shadow-color: rgba(0, 0, 0, 0.05);
+}
