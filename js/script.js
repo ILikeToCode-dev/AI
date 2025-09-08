@@ -1,8 +1,12 @@
 // Configuration
 const apiKey = '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';
 const model = 'deepseek/deepseek-chat-v3-0324:free';
+const qwenApiKey = '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';
+const qwenModel = 'qwen/qwen3-coder:free';
 let currentMode = 'normal';
-let conversationHistory = code blocks```
+let conversationHistory = [{ 
+    role: 'system', 
+    content: 'You are a virtual assistant made by Utkarsh. You are helpful and respond accordingly. Use Markdown for formatting, such as **bold**, *italics*, lists, and `````` for code.' 
 }];
 
 // Utility Functions
@@ -108,18 +112,18 @@ async function performWebSearch(query) {
 }
 
 // Main API Call Function
-async function callAPI(messages) {
+async function callAPI(messages, key = apiKey, mod = model) {
     try {
         const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`,
+                'Authorization': `Bearer ${key}`,
                 'HTTP-Referer': window.location.origin,
                 'X-Title': 'Chatbot by Utkarsh'
             },
             body: JSON.stringify({
-                model: model,
+                model: mod,
                 messages: messages,
                 max_tokens: 2000,
                 temperature: 0.7
@@ -172,6 +176,14 @@ async function sendMessage() {
 
     try {
         let finalResponse;
+        let key = apiKey;
+        let mod = model;
+
+        // Use Qwen for coding mode
+        if (currentMode === 'coding') {
+            key = qwenApiKey;
+            mod = qwenModel;
+        }
 
         // Handle different modes
         if (currentMode === 'search' || currentMode === 'coding') {
@@ -182,10 +194,10 @@ async function sendMessage() {
             const contextualMessages = [...conversationHistory];
             contextualMessages[contextualMessages.length - 1] = { role: 'user', content: searchContext };
             
-            finalResponse = await callAPI(contextualMessages);
+            finalResponse = await callAPI(contextualMessages, key, mod);
         } else {
             // Normal mode - just call API directly
-            finalResponse = await callAPI(conversationHistory);
+            finalResponse = await callAPI(conversationHistory, key, mod);
         }
 
         clearTimeout(slowTimer);
@@ -247,3 +259,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
