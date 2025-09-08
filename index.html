@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot like ChatGPT</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="chat-container">
+        <button id="settings-button">⚙️</button>
+        <div id="chat-messages"></div>
+        <div id="chat-input">
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <div id="settings-panel">
+        <h3>Customize UI</h3>
+        <label>Background Color: <input type="color" id="bg-color" value="#f4f4f9"></label>
+        <label>User Message Color: <input type="color" id="user-msg-color" value="#e0f7fa"></label>
+        <label>Bot Message Color: <input type="color" id="bot-msg-color" value="#f1f0f0"></label>
+        <label>Font Size: <input type="range" id="font-size" min="12" max="20" value="16"></label>
+        <label>Mode:
+            <select id="mode-select">
+                <option value="normal">Normal (search when needed)</option>
+                <option value="search">Search (always search)</option>
+                <option value="coding">Coding (always search)</option>
+            </select>
+            <div class="disclaimer" id="mode-disclaimer" style="display: none;">Note: This mode may lead to slower responses due to mandatory web searches.</div>
+        </label>
+        <h3>Themes</h3>
+        <label>Theme:
+            <select id="theme-select">
+                <option value="light-blue">Light Blue</option>
+                <option value="dark-blue">Dark Blue</option>
+                <option value="light-mode">Light Mode</option>
+            </select>
+        </label>
+        <button id="apply-settings">Apply</button>
+        <button id="close-settings">Close</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
