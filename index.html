@@ -15,7 +15,7 @@
         <div id="chat-messages"></div>
         <div id="chat-input">
             <input type="text" id="user-input" placeholder="Type your message...">
-            <button id="send-button">Send</button>
+            <button onclick="sendMessage()">Send</button>
         </div>
     </div>
 
@@ -41,8 +41,8 @@
                 <option value="light-mode">Light Mode</option>
             </select>
         </label>
-        <button id="apply-settings">Apply</button>
-        <button id="close-settings">Close</button>
+        <button onclick="applySettings()">Apply</button>
+        <button onclick="toggleSettings()">Close</button>
     </div>
 
     <script src="script.js"></script>
