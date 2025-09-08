@@ -2,7 +2,9 @@
 const apiKey = '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';
 const model = 'deepseek/deepseek-chat-v3-0324:free';
 let currentMode = 'normal';
-let conversationHistory = code blocks```
+let conversationHistory = [{ 
+    role: 'system', 
+    content: 'You are a virtual assistant made by Utkarsh. You are helpful and respond accordingly. Use Markdown for formatting, such as **bold**, *italics*, lists, and `````` for code.' 
 }];
 
 // Utility Functions
@@ -62,7 +64,7 @@ function highlightCode(messageDiv) {
 
 function addCopyButtons(messageDiv) {
     const codeBlocks = messageDiv.querySelectorAll('pre');
-    codeBlocks.forEach(block => {
+    codeBlocks.forEach((block) => {
         const button = document.createElement('button');
         button.className = 'copy-button';
         button.textContent = 'Copy';
@@ -94,7 +96,7 @@ async function performWebSearch(query) {
         
         if (data.RelatedTopics && data.RelatedTopics.length > 0) {
             result += "Related Topics:\n";
-            data.RelatedTopics.forEach(topic => {
+            data.RelatedTopics.forEach((topic) => {
                 if (topic.Text && topic.FirstURL) {
                     result += `- [${topic.Text}](${topic.FirstURL})\n`;
                 }
@@ -134,11 +136,11 @@ async function callAPI(messages) {
 
         console.log('API Response:', data); // Debug logging
 
-        if (!data.choices || !data.choices || !data.choices.message) {
+        if (!data.choices || !data.choices[0] || !data.choices[0].message) {
             throw new Error('Invalid response structure: ' + JSON.stringify(data));
         }
 
-        return data.choices.message.content;
+        return data.choices[0].message.content;
     } catch (error) {
         console.error('API Error:', error);
         throw error;
